@@ -785,3 +785,22 @@ gpio!(GPIOG, gpiog, gpioc, gpiogen, gpiogrst, PGx, 6, [
     PG14: (pg14, 14, Input<Floating>, AFRH, exticr4),
     PG15: (pg15, 15, Input<Floating>, AFRH, exticr4),
 ]);
+
+gpio!(GPIOI, gpioi, gpioi, gpiogen, gpiogrst, PGx, 6, [
+    PI0: (pi0, 0, Input<Floating>, AFRL, exticr1),
+    PI1: (pi1, 1, Input<Floating>, AFRL, exticr1),
+    PI2: (pi2, 2, Input<Floating>, AFRL, exticr1),
+    PI3: (pi3, 3, Input<Floating>, AFRL, exticr1),
+    PI4: (pi4, 4, Input<Floating>, AFRL, exticr2),
+    PI5: (pi5, 5, Input<Floating>, AFRL, exticr2),
+    PI6: (pi6, 6, Input<Floating>, AFRL, exticr2),
+    PI7: (pi7, 7, Input<Floating>, AFRL, exticr2),
+    PI8: (pi8, 8, Input<Floating>, AFRH, exticr3),
+    PI9: (pi9, 9, Input<Floating>, AFRH, exticr3),
+    PI10: (pi10, 10, Input<Floating>, AFRH, exticr3),
+    PI11: (pi11, 11, Input<Floating>, AFRH, exticr3),
+    PI12: (pi12, 12, Input<Floating>, AFRH, exticr4),
+    PI13: (pi13, 13, Input<Floating>, AFRH, exticr4),
+    PI14: (pi14, 14, Input<Floating>, AFRH, exticr4),
+    PI15: (pi15, 15, Input<Floating>, AFRH, exticr4),
+]);

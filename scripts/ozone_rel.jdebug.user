@@ -1,60 +1,37 @@
 
-Breakpoint=0800195C, State=On
-OpenDocument="num.rs", FilePath="/home/romanm/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore/fmt/num.rs", Line=144
-OpenDocument="lib.rs", FilePath="/home/romanm/rust_proj/m4mon8-n/cortex-m-rt/src/lib.rs", Line=481
-OpenDocument="stm32l4xx_hal_adc.c", FilePath="/home/romanm/rust_proj/m4mon8-n/m4mon8_cube/hal_cube/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_adc.c", Line=614
-OpenDocument="bus.rs", FilePath="/home/romanm/rust_proj/l4r9/usb-device/src/bus.rs", Line=272
-OpenDocument="main.rs", FilePath="/home/romanm/rust_proj/m4mon8-n/src/main.rs", Line=52
-OpenDocument="gpio.rs", FilePath="/home/romanm/rust_proj/m4mon8-n/stm32l4xx-hal/src/gpio.rs", Line=133
-OpenDocument="atomic.rs", FilePath="/home/romanm/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore/sync/atomic.rs", Line=2266
-OpenDocument="rtc.rs", FilePath="/home/romanm/rust_proj/m4mon8-n/stm32l4xx-hal/src/rtc.rs", Line=128
-OpenDocument="datetime.rs", FilePath="/home/romanm/rust_proj/m4mon8-n/stm32l4xx-hal/src/datetime.rs", Line=83
-OpenDocument="cr.rs", FilePath="/home/romanm/rust_proj/l4r9/stm32-rs/stm32l4/src/stm32l4r9/rtc/cr.rs", Line=421
-OpenDocument="mod.rs", FilePath="/home/romanm/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore/ptr/mod.rs", Line=0
-OpenDocument="mod.rs", FilePath="/home/romanm/rust_proj/l4r9/stm32-rs/stm32l4/src/stm32l4r9/mod.rs", Line=2194
-OpenDocument="mod.rs", FilePath="/home/romanm/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/peripheral/mod.rs", Line=142
-OpenDocument="mod.rs", FilePath="/home/romanm/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore/fmt/mod.rs", Line=318
-OpenDocument="lib.rs", FilePath="/home/romanm/.cargo/registry/src/github.com-1ecc6299db9ec823/log-0.4.8/src/lib.rs", Line=1273
-OpenDocument="control_pipe.rs", FilePath="/home/romanm/rust_proj/l4r9/usb-device/src/control_pipe.rs", Line=87
-OpenDocument="interrupt.rs", FilePath="/home/romanm/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/interrupt.rs", Line=28
-OpenDocument="sys.rs", FilePath="/home/romanm/rust_proj/m4mon8-n/src/sys.rs", Line=0
-OpenDocument="generic.rs", FilePath="/home/romanm/rust_proj/l4r9/stm32-rs/stm32l4/src/generic.rs", Line=133
-OpenDocument="tr.rs", FilePath="/home/romanm/rust_proj/l4r9/stm32-rs/stm32l4/src/stm32l4r9/rtc/tr.rs", Line=107
-OpenDocument="lib.rs", FilePath="/home/romanm/rust_proj/m4mon8-n/jlink_rtt/rtt/src/lib.rs", Line=211
-OpenDocument="cell.rs", FilePath="/home/romanm/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore/cell.rs", Line=867
-OpenDocument="otg_fs_device.rs", FilePath="/home/romanm/rust_proj/l4r9/stm32ral/src/stm32l4/stm32l4x6/otg_fs_device.rs", Line=2160
-OpenDocument="mod.rs", FilePath="/rustc/b2e36e6c2d229126b59e892c9147fbb68115d292/src/libcore/fmt/mod.rs", Line=0
-OpenDocument="mod.rs", FilePath="/home/romanm/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore/slice/mod.rs", Line=3292
-OpenDocument="option.rs", FilePath="/home/romanm/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore/option.rs", Line=375
-OpenDocument="syst.rs", FilePath="/home/romanm/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.2/src/peripheral/syst.rs", Line=127
-OpenDocument="rcc.rs", FilePath="/home/romanm/rust_proj/m4mon8-n/stm32l4xx-hal/src/rcc.rs", Line=748
-OpenDocument="register.rs", FilePath="/home/romanm/rust_proj/l4r9/stm32ral/src/register.rs", Line=371
-OpenDocument="intrinsics.rs", FilePath="/home/romanm/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore/intrinsics.rs", Line=2007
-OpenDocument="otg_fs_global.rs", FilePath="/home/romanm/rust_proj/l4r9/stm32ral/src/stm32l4/stm32l4x6/otg_fs_global.rs", Line=1792
-OpenDocument="usb.rs", FilePath="/home/romanm/rust_proj/m4mon8/src/usb.rs", Line=47
-OpenDocument="lib.rs", FilePath="/home/romanm/.cargo/registry/src/github.com-1ecc6299db9ec823/vcell-0.1.2/src/lib.rs", Line=0
-OpenDocument="device.rs", FilePath="/home/romanm/rust_proj/l4r9/usb-device/src/device.rs", Line=143
+Breakpoint=3146252865: 53: 0, Permitted Impl.=BP_TYPE_MIXED, State=BP_STATE_ON
+Breakpoint=0x080005BA, State=BP_STATE_ON
+Breakpoint=0x080005BE, State=BP_STATE_ON
+Breakpoint=0x080005C0, State=BP_STATE_ON
+Breakpoint=0x080005C2, State=BP_STATE_ON
+Breakpoint=0x080005C6, State=BP_STATE_ON
+Breakpoint=0x0800195C, State=BP_STATE_DISABLED
+OpenDocument="gpio.rs", FilePath="/home/fmv/work/l4r9-octo/stm32l4xx-hal/src/gpio.rs", Line=194
+OpenDocument="mod.rs", FilePath="/home/fmv/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore/ptr/mod.rs", Line=1142
+OpenDocument="asm.s", FilePath="/home/adam/Projects/rust-embedded/cortex-m/asm.s", Line=0
+OpenDocument="main.rs", FilePath="/home/fmv/work/l4r9-octo/src/main.rs", Line=32
+OpenDocument="lib.rs", FilePath="/home/fmv/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-rt-0.6.12/src/lib.rs", Line=482
 OpenToolbar="Debug", Floating=0, x=0, y=0
-OpenWindow="Call Stack", DockArea=RIGHT, x=0, y=0, w=1025, h=441, FilterBarShown=0, ToolBarShown=0
-OpenWindow="Registers 1", DockArea=RIGHT, x=0, y=0, w=1025, h=441, FilterBarShown=0, ToolBarShown=0, FilteredItems=[], RefreshRate=1
-OpenWindow="Source Files", DockArea=LEFT, x=0, y=2, w=137, h=132, FilterBarShown=1, ToolBarShown=0
-OpenWindow="Disassembly", DockArea=LEFT, x=0, y=1, w=137, h=165, FilterBarShown=0, ToolBarShown=0, ExecCountersShown=0, InstEncodingsShown=0
+OpenWindow="Call Stack", DockArea=RIGHT, x=0, y=0, w=1025, h=411, FilterBarShown=0, ToolBarShown=0
+OpenWindow="Registers 1", DockArea=RIGHT, x=0, y=0, w=1025, h=411, FilterBarShown=0, ToolBarShown=0, FilteredItems=[], RefreshRate=1
+OpenWindow="Source Files", DockArea=LEFT, x=0, y=2, w=137, h=119, FilterBarShown=1, ToolBarShown=0
+OpenWindow="Disassembly", DockArea=LEFT, x=0, y=1, w=137, h=161, FilterBarShown=0, ToolBarShown=0, ExecCountersShown=0, InstEncodingsShown=0
 OpenWindow="Source", x=0, y=0, w=0, h=0, FilterBarShown=0, ToolBarShown=0, ExecCountersShown=0
-OpenWindow="Break & Tracepoints", DockArea=LEFT, x=0, y=1, w=137, h=165, FilterBarShown=0, ToolBarShown=0, VectorCatchIndexMask=0
-OpenWindow="Global Data", DockArea=RIGHT, x=0, y=0, w=1025, h=441, FilterBarShown=1, ToolBarShown=0
-OpenWindow="Local Data", DockArea=RIGHT, x=0, y=0, w=1025, h=441, FilterBarShown=0, ToolBarShown=0
-OpenWindow="Watched Data", DockArea=RIGHT, x=0, y=0, w=1025, h=441, FilterBarShown=0, ToolBarShown=0
-OpenWindow="Functions", DockArea=LEFT, x=0, y=0, w=137, h=132, FilterBarShown=1, ToolBarShown=0
-OpenWindow="Terminal", DockArea=BOTTOM, x=1, y=0, w=1644, h=491, FilterBarShown=0, ToolBarShown=0
-OpenWindow="Console", DockArea=BOTTOM, x=0, y=0, w=855, h=491, FilterBarShown=0, ToolBarShown=0
-TableHeader="Global Data", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Location";"Size";"Type";"Scope"], ColWidths=[204;328;70;120;192;420]
+OpenWindow="Break & Tracepoints", DockArea=LEFT, x=0, y=1, w=137, h=161, FilterBarShown=0, ToolBarShown=0, VectorCatchIndexMask=0
+OpenWindow="Global Data", DockArea=RIGHT, x=0, y=0, w=1025, h=411, FilterBarShown=1, ToolBarShown=0
+OpenWindow="Local Data", DockArea=RIGHT, x=0, y=0, w=1025, h=411, FilterBarShown=0, ToolBarShown=0
+OpenWindow="Watched Data", DockArea=RIGHT, x=0, y=0, w=1025, h=411, FilterBarShown=0, ToolBarShown=0
+OpenWindow="Functions", DockArea=LEFT, x=0, y=0, w=137, h=119, FilterBarShown=1, ToolBarShown=0
+OpenWindow="Terminal", DockArea=BOTTOM, x=1, y=0, w=1057, h=491, FilterBarShown=0, ToolBarShown=0
+OpenWindow="Console", DockArea=BOTTOM, x=0, y=0, w=550, h=491, FilterBarShown=0, ToolBarShown=0
 TableHeader="Watched Data", SortCol="Expression", SortOrder="ASCENDING", VisibleCols=["Expression";"Value";"Location";"Refresh";"Type"], ColWidths=[259;126;195;73;372]
 TableHeader="Local Data", SortCol="Size", SortOrder="DESCENDING", VisibleCols=["Name";"Value";"Location";"Size";"Type";"Scope"], ColWidths=[251;128;141;105;191;209]
 TableHeader="Call Stack", SortCol="Function", SortOrder="ASCENDING", VisibleCols=["Function";"Stack Frame";"Source";"PC";"Return Address";"Stack Used"], ColWidths=[677;220;196;136;164;73]
-TableHeader="Registers 1", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Address";"Description"], ColWidths=[257;337;84;532]
+TableHeader="Registers 1", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Address";"Description"], ColWidths=[257;337;84;332]
 TableHeader="Vector Catches", SortCol="None", SortOrder="ASCENDING", VisibleCols=["";"Vector Catch";"Description"], ColWidths=[50;300;500]
-TableHeader="Break & Tracepoints", SortCol="None", SortOrder="ASCENDING", VisibleCols=["";"Type";"Location";"Extras"], ColWidths=[55;60;84;59]
-TableHeader="Functions", SortCol="Name", SortOrder="DESCENDING", VisibleCols=["Name";"Address";"Size";"#Insts";"Source"], ColWidths=[370;69;48;57;147]
-TableHeader="Source Files", SortCol="File", SortOrder="ASCENDING", VisibleCols=["File";"Status";"Size";"#Insts";"Path"], ColWidths=[253;59;48;57;861]
-TableHeader="Power Graph", SortCol="Index", SortOrder="ASCENDING", VisibleCols=["Index";"Time";"Channel 0"], ColWidths=[84;119;126]
+TableHeader="Break & Tracepoints", SortCol="None", SortOrder="ASCENDING", VisibleCols=["";"Type";"Location";"Extras"], ColWidths=[55;60;84;84]
+TableHeader="Global Data", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Location";"Size";"Type";"Scope"], ColWidths=[204;328;70;120;192;210]
+TableHeader="Functions", SortCol="Name", SortOrder="DESCENDING", VisibleCols=["Name";"Address";"Size";"#Insts";"Source"], ColWidths=[370;69;48;57;140]
+TableHeader="Source Files", SortCol="File", SortOrder="ASCENDING", VisibleCols=["File";"Status";"Size";"#Insts";"Path"], ColWidths=[253;59;48;57;791]
+TableHeader="Power Sampling", SortCol="None", SortOrder="ASCENDING", VisibleCols=["Index";"Time";"Ch 0"], ColWidths=[100;100;100]
 TableHeader="RegisterSelectionDialog", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Auto";"Name";"Address";"Description"], ColWidths=[27;27;27;27]

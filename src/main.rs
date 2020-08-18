@@ -1,32 +1,12 @@
-#![no_std]
+//! Interfacing the on-board L3GD20 (gyroscope)
+//#![deny(unsafe_code)]
+// #![deny(warnings)]
 #![no_main]
-
-#![allow(dead_code)]
+#![no_std]
 
 #[macro_use]
 extern crate log;
 extern crate jlink_rtt;
-
-use cortex_m_rt::{entry, exception};
-use cortex_m::asm;
-use embedded_hal::digital::v2::OutputPin;
-
-use stm32l4xx_hal::{
-    prelude::*,
-    i2c, pac,
-    prelude::*,
-    rtc::Rtc,
-    stm32,
-    stm32::interrupt,
-    stm32::Interrupt,
-    datetime::{Date, Time},
-    timer::{Event, Timer},
-    pwr::{Pwr, PwrExt},
-    delay::Delay,
-    pac::NVIC,
-    gpio,
-};
-
 
 #[macro_use]
 mod macros;
@@ -34,90 +14,109 @@ mod sys;
 #[cfg(not(feature = "prod"))]
 mod emblog;
 
-// ------ ------
-// SINGLETONS
-// ------ ------
+#[macro_use(entry, exception)]
+extern crate cortex_m_rt as rt;
+extern crate cortex_m;
+extern crate embedded_hal as ehal;
+//extern crate panic_semihosting;
+extern crate stm32l4xx_hal as hal;
 
-static mut G_RTC: Option<Rtc> = None;
+use crate::ehal::spi::{Mode, Phase, Polarity};
+use crate::hal::prelude::*;
+use crate::hal::spi::Spi;
+use crate::rt::ExceptionFrame;
+use cortex_m::asm;
+use stm32l4xx_hal::pac;
+
+
+/// SPI mode
+pub const MODE: Mode = Mode {
+    phase: Phase::CaptureOnFirstTransition,
+    polarity: Polarity::IdleLow,
+};
+
+//spi clock pin - i6
+//spi io 0(SI) pin - i11
+//spi io 1(SO) pin - i10
+//spi cs pin - g12
 
 
 #[entry]
 fn main() -> ! {
-    #[cfg(not(feature = "prod"))]
     emblog::init().unwrap();
 
-    info!("Loader startup!");
+    let p = hal::stm32::Peripherals::take().unwrap();
 
-    let cp = cortex_m::Peripherals::take().unwrap();
-    let dp = pac::Peripherals::take().unwrap();
-    let mut rcc = dp.RCC.constrain();
-    let mut flash = dp.FLASH.constrain();
-    
-    let mut pwr = dp.PWR.constrain(&mut rcc.apb1r1);
+    let mut flash = p.FLASH.constrain();
+    let mut rcc = p.RCC.constrain();
+    let mut pwr = p.PWR.constrain(&mut rcc.apb1r1);
 
+    info!("Hello");
 
-    let clocks = rcc.cfgr
-        .sysclk(64.mhz())
-        .lsi(true)
-        .hsi48(true)
+    // TRY the other clock configuration
+    // let clocks = rcc.cfgr.freeze(&mut flash.acr);
+    let clocks = rcc
+        .cfgr
+        .sysclk(80.mhz())
+        .pclk1(80.mhz())
+        .pclk2(80.mhz())
         .freeze(&mut flash.acr, &mut pwr);
 
-    let mut timer = Delay::new(cp.SYST, clocks);
-    let rtc = Rtc::rtc(dp.RTC, &mut rcc.apb1r1, &mut rcc.bdcr, &mut pwr.cr1, clocks);
+    let mut gpioa = p.GPIOA.split(&mut rcc.ahb2);
+    let mut gpiob = p.GPIOB.split(&mut rcc.ahb2);
+    let mut gpioi = p.GPIOI.split(&mut rcc.ahb2);
+    let mut gpiog = p.GPIOG.split(&mut rcc.ahb2);
+    let rcc = unsafe { &*pac::RCC::ptr()};
+    rcc.ahb2enr.modify(|_, w| {
+        w.gpioien().set_bit();
+        w
+    });
 
-    let mut time = Time::new(21.hours(), 57.minutes(), 32.seconds(), false);
-    let mut date = Date::new(1.day(), 24.date(), 4.month(), 2018.year());
-
-    rtc.set_time(&time);
-    rtc.set_date(&date);
-
-    //timer.delay_ms(1000_u32);
-    //timer.delay_ms(1000_u32);
-    //timer.delay_ms(1000_u32);
-    //delay(64_000_000);
-    //delay(64_000_000);
-    //delay(64_000_000);
-
-    time = rtc.get_time();
-    date = rtc.get_date();
-
-    unsafe { G_RTC = Some(rtc); }
-    unsafe { NVIC::unmask(Interrupt::RTC_WKUP) };
-
-    info!("Time: {:?}", time);
-    info!("Date: {:?}", date);
-    info!("Good bye!");
+    let mut pinout = gpioi.pi6.into_push_pull_output(&mut gpioi.moder, &mut gpioi.otyper);
 
     loop {
-
-        core::sync::atomic::fence(
-            core::sync::atomic::Ordering::SeqCst
-        );
+        pinout.set_low();
+        info!("Pin");
+        pinout.set_high();
     }
-}
 
 
-#[interrupt]
-fn RTC_WKUP() {
     
-    let rtc = unsafe { G_RTC.as_mut().unwrap() };
+    // // The `L3gd20` abstraction exposed by the `f3` crate requires a specific pin configuration to
+    // // be used and won't accept any configuration other than the one used here. Trying to use a
+    // // different pin configuration will result in a compiler error.
+    let sck = gpioi.pi6.into_af5(&mut gpioi.moder, &mut gpioi.afrl);
+    let miso = gpioi.pi11.into_af5(&mut gpioi.moder, &mut gpioi.afrh);
+    let mosi = gpioi.pi10.into_af5(&mut gpioi.moder, &mut gpioi.afrh);
 
-    let time = rtc.get_time();
-    let date = rtc.get_date();
+    // // nss.set_high();
+    // dc.set_low();
 
-    info!("Time: {:?}", time);
-    info!("Date: {:?}", date);
-    info!("Good bye!");
+    // let mut spi = Spi::spi1(
+    //     p.SPI1,
+    //     (sck, miso, mosi),
+    //     MODE,
+    //     // 1.mhz(),
+    //     100.khz(),
+    //     clocks,
+    //     &mut rcc.apb2,
+    // );
+
+    // // nss.set_low();
+    // let data = [0x3C];
+    // spi.write(&data).unwrap();
+    // spi.write(&data).unwrap();
+    // spi.write(&data).unwrap();
+    // // nss.set_high();
+
+    // // when you reach this breakpoint you'll be able to inspect the variable `_m` which contains the
+    // // gyroscope and the temperature sensor readings
+    asm::bkpt();
+
+    loop {}
 }
 
-#[exception]
-fn SysTick() {
-    //let rtc = unsafe { G_RTC.as_mut().unwrap() };
-
-    //let time = rtc.get_time();
-    //let date = rtc.get_date();
-
-    //info!("Time: {:?}", time);
-    //info!("Date: {:?}", date);
-    //info!("Good bye!");
-}
+// #[exception]
+// fn HardFault(ef: &ExceptionFrame) -> ! {
+//     panic!("{:#?}", ef);
+// }
