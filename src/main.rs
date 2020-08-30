@@ -66,19 +66,19 @@ fn main() -> ! {
     let mut gpiob = p.GPIOB.split(&mut rcc.ahb2);
     let mut gpioi = p.GPIOI.split(&mut rcc.ahb2);
     let mut gpiog = p.GPIOG.split(&mut rcc.ahb2);
-    let rcc = unsafe { &*pac::RCC::ptr()};
-    rcc.ahb2enr.modify(|_, w| {
-        w.gpioien().set_bit();
-        w
-    });
+    // let rcc = unsafe { &*pac::RCC::ptr()};
+    // rcc.ahb2enr.modify(|_, w| {
+    //     w.gpioien().set_bit();
+    //     w
+    // });
 
-    let mut pinout = gpioi.pi6.into_push_pull_output(&mut gpioi.moder, &mut gpioi.otyper);
+    // let mut pinout = gpioi.pi6.into_push_pull_output(&mut gpioi.moder, &mut gpioi.otyper);
 
-    loop {
-        pinout.set_low();
-        info!("Pin");
-        pinout.set_high();
-    }
+    // loop {
+    //     pinout.set_low();
+    //     info!("Pin");
+    //     pinout.set_high();
+    // }
 
 
     
@@ -92,21 +92,21 @@ fn main() -> ! {
     // // nss.set_high();
     // dc.set_low();
 
-    // let mut spi = Spi::spi1(
-    //     p.SPI1,
-    //     (sck, miso, mosi),
-    //     MODE,
-    //     // 1.mhz(),
-    //     100.khz(),
-    //     clocks,
-    //     &mut rcc.apb2,
-    // );
+    let mut spi = Spi::spi1(
+        p.SPI1,
+        (sck, miso, mosi),
+        MODE,
+        // 1.mhz(),
+        100.khz(),
+        clocks,
+        &mut rcc.apb2,
+    );
 
     // // nss.set_low();
-    // let data = [0x3C];
-    // spi.write(&data).unwrap();
-    // spi.write(&data).unwrap();
-    // spi.write(&data).unwrap();
+    let data = [0x3C];
+    spi.write(&data).unwrap();
+    spi.write(&data).unwrap();
+    spi.write(&data).unwrap();
     // // nss.set_high();
 
     // // when you reach this breakpoint you'll be able to inspect the variable `_m` which contains the

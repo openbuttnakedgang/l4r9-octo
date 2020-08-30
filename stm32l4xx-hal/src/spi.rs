@@ -205,6 +205,7 @@ use crate::gpio::gpiod::*;
     feature = "stm32l4x6"
 ))]
 use crate::gpio::gpiog::*;
+use crate::gpio::gpioi::*;
 
 use crate::stm32::SPI1;
 #[cfg(any(
@@ -226,9 +227,9 @@ hal! {
     feature = "stm32l4x6"
 ))]
 pins!(SPI1, AF5,
-    SCK: [PA5, PB3, PE13],
-    MISO: [PA6, PB4, PE14],
-    MOSI: [PA7, PB5, PE15]);
+    SCK: [PA5, PB3, PE13, PI6],
+    MISO: [PA6, PB4, PE14, PI11],
+    MOSI: [PA7, PB5, PE15, PI10]);
 
 #[cfg(any(
     feature = "stm32l4x5",
