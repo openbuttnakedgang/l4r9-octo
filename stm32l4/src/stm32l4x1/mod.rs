@@ -936,6 +936,27 @@ impl Deref for GPIOH {
         unsafe { &*GPIOH::ptr() }
     }
 }
+
+///General-purpose I/Os
+pub struct GPIOI {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for GPIOH {}
+impl GPIOH {
+    ///Returns a pointer to the register block
+    #[inline(always)]
+    pub const fn ptr() -> *const gpioc::RegisterBlock {
+        0x4800_1c00 as *const _
+    }
+}
+impl Deref for GPIOH {
+    type Target = gpioc::RegisterBlock;
+    #[inline(always)]
+    fn deref(&self) -> &Self::Target {
+        unsafe { &*GPIOH::ptr() }
+    }
+}
+
 ///Serial audio interface
 pub struct SAI1 {
     _marker: PhantomData<*const ()>,

@@ -1,35 +1,24 @@
 
-OpenDocument="lib.rs", FilePath="/media/romanm/ssd01/rust_proj/m4mon8-octo/cortex-m-rt/src/lib.rs", Line=480
-OpenDocument="main.rs", FilePath="/media/romanm/ssd01/rust_proj/m4mon8-octo/src/main.rs", Line=35
-OpenDocument="datetime.rs", FilePath="/media/romanm/ssd01/rust_proj/m4mon8-octo/stm32l4xx-hal/src/datetime.rs", Line=74
-OpenDocument="intrinsics.rs", FilePath="/home/romanm/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore/intrinsics.rs", Line=0
-OpenDocument="atomic.rs", FilePath="/home/romanm/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore/sync/atomic.rs", Line=2561
-OpenDocument="macros.rs", FilePath="/rustc/6c8927b0cf80ceee19386026cf9d7fd4fd9d486f/src/stdarch/crates/core_arch/src/macros.rs", Line=25
-OpenDocument="result.rs", FilePath="/home/romanm/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore/result.rs", Line=993
-OpenDocument="mod.rs", FilePath="/home/romanm/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore/ptr/mod.rs", Line=1040
-OpenDocument="lib.rs", FilePath="/home/romanm/.cargo/registry/src/github.com-1ecc6299db9ec823/generic-array-0.12.3/src/lib.rs", Line=1187
+Breakpoint=851517231: 78: 0, State=BP_STATE_ON
+Breakpoint=851517231: 79: 0, State=BP_STATE_ON
+Breakpoint=851517231: 80: 0, State=BP_STATE_ON
+OpenDocument="lib.rs", FilePath="/home/michail/.cargo/registry/src/github.com-1ecc6299db9ec823/log-0.4.11/src/lib.rs", Line=1176
+OpenDocument="mod.rs", FilePath="/home/michail/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore/fmt/mod.rs", Line=184
+OpenDocument="main.rs", FilePath="/home/michail/work/l4r9-octo/src/main.rs", Line=70
 OpenToolbar="Debug", Floating=0, x=0, y=0
-OpenWindow="Call Stack", DockArea=RIGHT, x=0, y=0, w=1064, h=540, FilterBarShown=0, ToolBarShown=0
-OpenWindow="Registers 1", DockArea=RIGHT, x=0, y=0, w=1064, h=540, FilterBarShown=0, ToolBarShown=0, FilteredItems=[], RefreshRate=1
-OpenWindow="Source Files", DockArea=LEFT, x=0, y=2, w=297, h=125, FilterBarShown=1, ToolBarShown=0
-OpenWindow="Disassembly", DockArea=LEFT, x=0, y=1, w=297, h=278, FilterBarShown=0, ToolBarShown=0, ExecCountersShown=0, InstEncodingsShown=0
+OpenWindow="Registers 1", DockArea=RIGHT, x=0, y=0, w=1064, h=548, FilterBarShown=0, ToolBarShown=0, FilteredItems=[], RefreshRate=1
+OpenWindow="Source Files", DockArea=LEFT, x=0, y=2, w=297, h=128, FilterBarShown=1, ToolBarShown=0
+OpenWindow="Disassembly", DockArea=LEFT, x=0, y=1, w=297, h=263, FilterBarShown=0, ToolBarShown=0, ExecCountersShown=0, InstEncodingsShown=0
 OpenWindow="Source", x=0, y=0, w=0, h=0, FilterBarShown=0, ToolBarShown=0, ExecCountersShown=0
-OpenWindow="Break & Tracepoints", DockArea=LEFT, x=0, y=1, w=297, h=278, FilterBarShown=0, ToolBarShown=0, VectorCatchIndexMask=0
-OpenWindow="Memory 1", DockArea=BOTTOM, x=0, y=0, w=856, h=392, FilterBarShown=0, ToolBarShown=0, EditorAddress=0x2000013C
-OpenWindow="Global Data", DockArea=RIGHT, x=0, y=0, w=1064, h=540, FilterBarShown=1, ToolBarShown=0
-OpenWindow="Local Data", DockArea=RIGHT, x=0, y=0, w=1064, h=540, FilterBarShown=0, ToolBarShown=0
-OpenWindow="Watched Data", DockArea=RIGHT, x=0, y=0, w=1064, h=540, FilterBarShown=0, ToolBarShown=0
-OpenWindow="Functions", DockArea=LEFT, x=0, y=0, w=297, h=125, FilterBarShown=1, ToolBarShown=0
-OpenWindow="Terminal", DockArea=BOTTOM, x=2, y=0, w=1013, h=392, FilterBarShown=0, ToolBarShown=0
-OpenWindow="Console", DockArea=BOTTOM, x=1, y=0, w=624, h=392, FilterBarShown=0, ToolBarShown=0
-TableHeader="Watched Data", SortCol="Expression", SortOrder="ASCENDING", VisibleCols=["Expression";"Value";"Location";"Refresh";"Type"], ColWidths=[259;126;195;73;411]
-TableHeader="Local Data", SortCol="Size", SortOrder="DESCENDING", VisibleCols=["Name";"Value";"Location";"Size";"Type";"Scope"], ColWidths=[251;128;141;105;191;248]
-TableHeader="Call Stack", SortCol="Function", SortOrder="ASCENDING", VisibleCols=["Function";"Stack Frame";"Source";"PC";"Return Address";"Stack Used"], ColWidths=[1343;220;196;136;164;73]
+OpenWindow="Break & Tracepoints", DockArea=LEFT, x=0, y=1, w=297, h=263, FilterBarShown=0, ToolBarShown=0, VectorCatchIndexMask=0
+OpenWindow="Memory 1", DockArea=BOTTOM, x=0, y=0, w=631, h=392, FilterBarShown=0, ToolBarShown=0, EditorAddress=0x2000011C
+OpenWindow="Functions", DockArea=LEFT, x=0, y=0, w=297, h=128, FilterBarShown=1, ToolBarShown=0
+OpenWindow="Terminal", DockArea=BOTTOM, x=2, y=0, w=746, h=392, FilterBarShown=0, ToolBarShown=0
+OpenWindow="Console", DockArea=BOTTOM, x=1, y=0, w=459, h=392, FilterBarShown=0, ToolBarShown=0
 TableHeader="Registers 1", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Address";"Description"], ColWidths=[257;337;84;371]
 TableHeader="Vector Catches", SortCol="None", SortOrder="ASCENDING", VisibleCols=["";"Vector Catch";"Description"], ColWidths=[50;300;500]
 TableHeader="Break & Tracepoints", SortCol="None", SortOrder="ASCENDING", VisibleCols=["";"Type";"Location";"Extras"], ColWidths=[55;60;84;98]
-TableHeader="Global Data", SortCol="Location", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Location";"Size";"Type";"Scope"], ColWidths=[584;328;70;120;192;210]
 TableHeader="Functions", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Address";"Size";"#Insts";"Source"], ColWidths=[747;69;48;57;147]
-TableHeader="Source Files", SortCol="File", SortOrder="DESCENDING", VisibleCols=["File";"Status";"Size";"#Insts";"Path"], ColWidths=[173;59;48;57;938]
-TableHeader="Power Graph", SortCol="Index", SortOrder="ASCENDING", VisibleCols=["Index";"Time";"Channel 0"], ColWidths=[84;119;126]
+TableHeader="Source Files", SortCol="File", SortOrder="DESCENDING", VisibleCols=["File";"Status";"Size";"#Insts";"Path"], ColWidths=[173;59;48;57;945]
+TableHeader="Power Sampling", SortCol="None", SortOrder="ASCENDING", VisibleCols=["Index";"Time";"Ch 0"], ColWidths=[100;100;100]
 TableHeader="RegisterSelectionDialog", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Auto";"Name";"Address";"Description"], ColWidths=[27;27;27;27]

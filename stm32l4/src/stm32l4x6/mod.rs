@@ -2196,6 +2196,7 @@ pub struct Peripherals {
     pub GPIOH: GPIOH,
     ///GPIOI
     pub GPIOI: GPIOI,
+    ///SAI1OI: GPIOI,
     ///SAI1
     pub SAI1: SAI1,
     ///SAI2

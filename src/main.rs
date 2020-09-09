@@ -20,6 +20,7 @@ extern crate cortex_m;
 extern crate embedded_hal as ehal;
 //extern crate panic_semihosting;
 extern crate stm32l4xx_hal as hal;
+//use crate::hal::qspi::{Qspi, QspiConfig, QspiMode, QspiReadCommand};
 
 use crate::ehal::spi::{Mode, Phase, Polarity};
 use crate::hal::prelude::*;
@@ -50,6 +51,7 @@ fn main() -> ! {
     let mut flash = p.FLASH.constrain();
     let mut rcc = p.RCC.constrain();
     let mut pwr = p.PWR.constrain(&mut rcc.apb1r1);
+    p.QUADSPI;
 
     info!("Hello");
 
@@ -66,18 +68,18 @@ fn main() -> ! {
     let mut gpiob = p.GPIOB.split(&mut rcc.ahb2);
     let mut gpioi = p.GPIOI.split(&mut rcc.ahb2);
     let mut gpiog = p.GPIOG.split(&mut rcc.ahb2);
-    // let rcc = unsafe { &*pac::RCC::ptr()};
-    // rcc.ahb2enr.modify(|_, w| {
-    //     w.gpioien().set_bit();
-    //     w
-    // });
+    let rcc1 = unsafe { &*pac::RCC::ptr()};
+    rcc1.ahb2enr.modify(|_, w| {
+        w.gpioien().set_bit();
+        w
+    });
 
     // let mut pinout = gpioi.pi6.into_push_pull_output(&mut gpioi.moder, &mut gpioi.otyper);
 
     // loop {
     //     pinout.set_low();
     //     info!("Pin");
-    //     pinout.set_high();
+    //     pinout.set_high();  
     // }
 
 
@@ -85,21 +87,29 @@ fn main() -> ! {
     // // The `L3gd20` abstraction exposed by the `f3` crate requires a specific pin configuration to
     // // be used and won't accept any configuration other than the one used here. Trying to use a
     // // different pin configuration will result in a compiler error.
-    let sck = gpioi.pi6.into_af5(&mut gpioi.moder, &mut gpioi.afrl);
-    let miso = gpioi.pi11.into_af5(&mut gpioi.moder, &mut gpioi.afrh);
-    let mosi = gpioi.pi10.into_af5(&mut gpioi.moder, &mut gpioi.afrh);
+    // let sck = gpioi.pi6.into_af5(&mut gpioi.moder, &mut gpioi.afrl);
+    // let miso = gpioi.pi11.into_af5(&mut gpioi.moder, &mut gpioi.afrh);
+    // let mosi = gpioi.pi10.into_af5(&mut gpioi.moder, &mut gpioi.afrh);
+
+    let sck = gpioa.pa5.into_af5(&mut gpioa.moder, &mut gpioa.afrl);
+    let miso = gpioa.pa6.into_af5(&mut gpioa.moder, &mut gpioa.afrl);
+    let mosi = gpioa.pa7.into_af5(&mut gpioa.moder, &mut gpioa.afrl);
+
+    let sck2 = gpiob.pb13.into_af5(&mut gpiob.moder, &mut gpiob.afrh);
+    let miso2 = gpiob.pb14.into_af5(&mut gpiob.moder, &mut gpiob.afrh);
+    let mosi2 = gpiob.pb15.into_af5(&mut gpiob.moder, &mut gpiob.afrh);
 
     // // nss.set_high();
     // dc.set_low();
 
-    let mut spi = Spi::spi1(
-        p.SPI1,
-        (sck, miso, mosi),
+    let mut spi = Spi::spi2(
+        p.SPI2,
+        (sck2, miso2, mosi2),
         MODE,
         // 1.mhz(),
         100.khz(),
         clocks,
-        &mut rcc.apb2,
+        &mut rcc.apb1r1,
     );
 
     // // nss.set_low();
@@ -107,6 +117,7 @@ fn main() -> ! {
     spi.write(&data).unwrap();
     spi.write(&data).unwrap();
     spi.write(&data).unwrap();
+    info!("Buy");
     // // nss.set_high();
 
     // // when you reach this breakpoint you'll be able to inspect the variable `_m` which contains the

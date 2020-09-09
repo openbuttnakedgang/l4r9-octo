@@ -202,3 +202,11 @@ pub mod usb;
     feature = "stm32l4x6"
 ))]
 pub mod pwm;
+#[cfg(any(
+    feature = "stm32l4x1",
+    feature = "stm32l4x2",
+    feature = "stm32l4x3",
+    feature = "stm32l4x5",
+    feature = "stm32l4x6"
+))]
+pub mod qspi;
