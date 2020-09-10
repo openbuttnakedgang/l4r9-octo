@@ -13,6 +13,7 @@ mod macros;
 mod sys;
 #[cfg(not(feature = "prod"))]
 mod emblog;
+mod ospi;
 
 #[macro_use(entry, exception)]
 extern crate cortex_m_rt as rt;
@@ -41,6 +42,21 @@ pub const MODE: Mode = Mode {
 //spi io 1(SO) pin - i10
 //spi cs pin - g12
 
+// AF5:
+// OCTOSPIM_P2_NCS - pg12
+// OCTOSPIM_P2_DQS - pg15
+// OCTOSPIM_P2_CLK - pi6
+
+// OCTOSPIM_P2_IO6 - pg9
+// OCTOSPIM_P2_IO7 - pg10
+// OCTOSPIM_P2_IO3 - ph8
+// OCTOSPIM_P2_IO4 - ph9
+// OCTOSPIM_P2_IO5 - ph10
+// OCTOSPIM_P2_IO2 - pi9
+// OCTOSPIM_P2_IO1 - pi10
+// OCTOSPIM_P2_IO0 - pi11
+
+//TODO: запустить пример из куба в kale
 
 #[entry]
 fn main() -> ! {
@@ -51,7 +67,6 @@ fn main() -> ! {
     let mut flash = p.FLASH.constrain();
     let mut rcc = p.RCC.constrain();
     let mut pwr = p.PWR.constrain(&mut rcc.apb1r1);
-    p.QUADSPI;
 
     info!("Hello");
 
@@ -102,14 +117,14 @@ fn main() -> ! {
     // // nss.set_high();
     // dc.set_low();
 
-    let mut spi = Spi::spi2(
-        p.SPI2,
-        (sck2, miso2, mosi2),
+    let mut spi = Spi::spi1(
+        p.SPI1,
+        (sck, miso, mosi),
         MODE,
         // 1.mhz(),
         100.khz(),
         clocks,
-        &mut rcc.apb1r1,
+        &mut rcc.apb2,
     );
 
     // // nss.set_low();
