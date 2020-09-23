@@ -41,9 +41,7 @@ impl OSpi {
         let mut gpioi = p.GPIOI.split(&mut rcc.ahb2);
         let mut gpiog = p.GPIOG.split(&mut rcc.ahb2);
         let mut gpioh = p.GPIOH.split(&mut rcc.ahb2);
-
-        let ospi = p.OCTOSPI2;
-        ospi.cr.modify(|_, w| w.en().set_bit());
+        ospi.cr.modify(|_, w| w.en().clear_bit());
         
         ospi.fcr.write(|w| {
             w.ctof()
@@ -56,5 +54,25 @@ impl OSpi {
                 .set_bit()
         });
 
+
+        // Octospi config
+        unsafe {ospi.cr.modify(|_, w| w.fthres().bits(4u8 - 1u8))};
+        while ospi.sr.read().busy().bit_is_set() {}
+        unsafe {ospi.cr.modify(|_, w| w.fmode().bits(1u8))};
+        while ospi.sr.read().busy().bit_is_set() {}
+        ospi.cr.modify(|_, w| w.en().set_bit());
+        while ospi.sr.read().busy().bit_is_set() {}
+        ospi.cr.modify(|_, w| w.apms().set_bit());
+        while ospi.sr.read().busy().bit_is_set() {}
+        unsafe {ospi.dcr1.modify(|_, w| w.csht().bits(1u8))};
+        while ospi.sr.read().busy().bit_is_set() {}
+        unsafe {ospi.dcr1.modify(|_, w| w.devsize().bits(26u8))};
+        while ospi.sr.read().busy().bit_is_set() {}
+        unsafe {ospi.dcr2.modify(|_, w| w.prescaler().bits(1u8))};
+        while ospi.sr.read().busy().bit_is_set() {}
+        ospi.sr.modify(|_, w| w.ftf().set_bit());
+        while ospi.sr.read().busy().bit_is_set() {}
+
+        //ospi.cr.modify(|_, w| w.ctcf().set_bit());
     }
 }
