@@ -1,4 +1,3 @@
-
 use log::{Level, Log, Metadata, Record, SetLoggerError};
 
 struct EmbLogger {
@@ -12,7 +11,6 @@ impl Log for EmbLogger {
 
     fn log(&self, record: &Record) {
         if self.enabled(record.metadata()) {
-
             let level = record.level();
 
             let target = if record.target().len() > 0 {
@@ -20,12 +18,12 @@ impl Log for EmbLogger {
             } else {
                 record.module_path().unwrap_or_default()
             };
-            
-            //if target.starts_with("delta::block") 
+
+            //if target.starts_with("delta::block")
             {
                 //println!("{:<5} [{}] {}", level, target, record.args());
                 println!("{}", record.args());
-                
+
                 //let tick = crate::DWT::get_cycle_count();
                 //println!("{} {:<5} [{}] {}", tick, level, target, record.args());
             }
@@ -40,7 +38,7 @@ static mut EMB_LOGGER: Option<EmbLogger> = None;
 
 pub fn init_with_level(level: Level) -> Result<(), SetLoggerError> {
     static mut EMB_LOGGER: Option<EmbLogger> = None;
-    
+
     // Unsafely init static logger
     let logger = unsafe {
         EMB_LOGGER = Some(EmbLogger { level });
@@ -55,5 +53,3 @@ pub fn init_with_level(level: Level) -> Result<(), SetLoggerError> {
 pub fn init() -> Result<(), SetLoggerError> {
     init_with_level(Level::Trace)
 }
-
-

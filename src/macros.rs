@@ -1,4 +1,3 @@
-
 #[cfg(not(feature = "prod"))]
 macro_rules! println {
     ($($arg:tt)*) => ({
@@ -10,6 +9,5 @@ macro_rules! println {
 
 #[cfg(feature = "prod")]
 macro_rules! println {
-    ($($arg:tt)*) => ({
-    });
+    ($($arg:tt)*) => {{}};
 }

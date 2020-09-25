@@ -1,4 +1,3 @@
-
 use core::panic::PanicInfo;
 
 use cortex_m::asm::{self, bkpt, delay, wfi};
@@ -15,7 +14,7 @@ pub fn reset() -> ! {
 //    // static const uint32_t CMD_BOOT = 0x544F4F42UL;
 //    // BOOT in ACII
 //    const BOOT: [u16;2] = [0x4F42, 0x544F];
-//    
+//
 //    backup_domain.write_data_register_low(0, BOOT[0]);
 //    backup_domain.write_data_register_low(1, BOOT[1]);
 //
@@ -30,9 +29,7 @@ fn panic(info: &PanicInfo) -> ! {
     error!("Panic handler! Reseting...");
     error!("Panic info : {}", info);
     loop {
-        core::sync::atomic::compiler_fence(
-            core::sync::atomic::Ordering::SeqCst
-        );
+        core::sync::atomic::compiler_fence(core::sync::atomic::Ordering::SeqCst);
     }
 }
 
@@ -40,12 +37,9 @@ fn panic(info: &PanicInfo) -> ! {
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
     loop {
-        core::sync::atomic::compiler_fence(
-            core::sync::atomic::Ordering::SeqCst
-        );
+        core::sync::atomic::compiler_fence(core::sync::atomic::Ordering::SeqCst);
     }
 }
-
 
 #[cfg(not(feature = "prod"))]
 #[exception]
@@ -54,9 +48,7 @@ fn HardFault(ef: &ExceptionFrame) -> ! {
     error!("HardFault handler!");
     error!("{:?}", &ef);
     loop {
-        core::sync::atomic::compiler_fence(
-            core::sync::atomic::Ordering::SeqCst
-        );
+        core::sync::atomic::compiler_fence(core::sync::atomic::Ordering::SeqCst);
     }
 }
 
@@ -64,9 +56,6 @@ fn HardFault(ef: &ExceptionFrame) -> ! {
 #[exception]
 fn HardFault(_ef: &ExceptionFrame) -> ! {
     loop {
-        core::sync::atomic::compiler_fence(
-            core::sync::atomic::Ordering::SeqCst
-        );
+        core::sync::atomic::compiler_fence(core::sync::atomic::Ordering::SeqCst);
     }
 }
-
