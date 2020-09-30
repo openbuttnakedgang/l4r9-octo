@@ -60,7 +60,6 @@ impl OSpi {
 
 
 
-        ospi.cr.modify(|_, w| w.en().clear_bit());
 
         ospi.fcr.write(|w| {
             w.ctof()
@@ -74,24 +73,38 @@ impl OSpi {
         });
 
         // Octospi config
-        unsafe { ospi.cr.modify(|_, w| w.fthres().bits(2u8 - 1u8)) };
+        ospi.cr.modify(|_, w| unsafe {
+            w.en()
+                .set_bit()
+                .apms()
+                .set_bit()
+                .fthres()
+                .bits(3u8 - 1u8)
+        });
         while ospi.sr.read().busy().bit_is_set() {}
-        ospi.cr.modify(|_, w| w.teie().set_bit());
-        while ospi.sr.read().busy().bit_is_set() {}
-        unsafe { ospi.cr.modify(|_, w| w.fmode().bits(1u8)) };
-        while ospi.sr.read().busy().bit_is_set() {}
-        ospi.cr.modify(|_, w| w.en().set_bit());
-        while ospi.sr.read().busy().bit_is_set() {}
-        ospi.cr.modify(|_, w| w.apms().set_bit());
-        while ospi.sr.read().busy().bit_is_set() {}
-        unsafe { ospi.dcr1.modify(|_, w| w.csht().bits(1u8)) };
-        while ospi.sr.read().busy().bit_is_set() {}
-        unsafe { ospi.dcr1.modify(|_, w| w.devsize().bits(25u8)) };
+        // ospi.sr.modify(|_, w| w.ftf().clear_bit());
+        // while ospi.sr.read().busy().bit_is_set() {}
+        // ospi.cr.modify(|_, w| w.teie().set_bit());
+        // while ospi.sr.read().busy().bit_is_set() {}
+        // ospi.cr.modify(|_, w| w.tcie().set_bit());
+        // while ospi.sr.read().busy().bit_is_set() {}
+        // ospi.cr.modify(|_, w| w.toie().set_bit());
+        // while ospi.sr.read().busy().bit_is_set() {}
+        // ospi.cr.modify(|_, w| w.en().set_bit());
+        // while ospi.sr.read().busy().bit_is_set() {}
+        // ospi.cr.modify(|_, w| w.apms().set_bit());
+        // while ospi.sr.read().busy().bit_is_set() {}
+        unsafe { ospi.dcr1.modify(|_, w| 
+            w.csht()
+                .bits(1u8)
+                .devsize()
+                .bits(25u8)
+        )};
         while ospi.sr.read().busy().bit_is_set() {}
         unsafe { ospi.dcr2.modify(|_, w| w.prescaler().bits(1u8)) };
         while ospi.sr.read().busy().bit_is_set() {}
-        ospi.sr.modify(|_, w| w.ftf().set_bit());
-        while ospi.sr.read().busy().bit_is_set() {}
+        // ospi.sr.modify(|_, w| w.ftf().set_bit());
+        // while ospi.sr.read().busy().bit_is_set() {}
 
         //ospi.fcr.write(|w| w.ctcf().set_bit());
         ospi.dlr.write(|w| unsafe { w.dl().bits(3u32 - 1) });
@@ -110,13 +123,20 @@ impl OSpi {
                 .dmode()
                 .bits(0b1)
                 .imode()
-                .bits(0b1)
+                .bits(1u8)
                 .ddtr()
                 .clear_bit()
+                .isize()
+                .bits(1u8)
         });
 
         ospi.tcr.modify(|_, w| unsafe { w.dcyc().bits(0b0) });
         ospi.ir.modify(|_, w| unsafe { w.instruction().bits(0x9f) });
+        ospi.cr.modify(|_, w| unsafe {w.fmode().bits(1u8)});
+        info!("{:x?}", &ospi.dr as *const _ as *const u8);
+        //ospi.ir.modify(|_, w| unsafe { w.instruction().bits(0x9f) });
+        ospi.ar.modify(|_, w| unsafe { w.address().bits(0x0) });
+
 
         if ospi.sr.read().tef().bit_is_set() {
             println!("Transfer error");

@@ -69,8 +69,6 @@ fn main() -> ! {
     let mut rcc = p.RCC.constrain();
     let mut pwr = p.PWR.constrain(&mut rcc.apb1r1);
 
-    info!("Hello");
-
     // TRY the other clock configuration
     // let clocks = rcc.cfgr.freeze(&mut flash.acr);
     let clocks = rcc
@@ -81,7 +79,7 @@ fn main() -> ! {
         .freeze(&mut flash.acr, &mut pwr);
 
     let mut ospi = OSpi::new();
-    ospi.init(); 
+    ospi.init();
 
     // let mut gpioa = p.GPIOA.split(&mut rcc.ahb2);
     // let mut gpiob = p.GPIOB.split(&mut rcc.ahb2);
