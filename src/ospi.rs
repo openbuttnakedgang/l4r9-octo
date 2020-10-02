@@ -94,7 +94,7 @@ impl OSpi {
         )};
         while ospi.sr.read().busy().bit_is_set() {}
         // Заполнение device configuration register 2
-        unsafe { ospi.dcr2.modify(|_, w| w.prescaler().bits(1u8)) };
+        unsafe { ospi.dcr2.modify(|_, w| w.prescaler().bits(2u8)) };
         while ospi.sr.read().busy().bit_is_set() {}
 
         // Заполнение data length register
@@ -112,7 +112,7 @@ impl OSpi {
                 .absize()
                 .bits(0)
                 .dmode()
-                .bits(0b1)
+                .bits(1u8)
                 .imode()
                 .bits(1u8)
                 .ddtr()
@@ -127,47 +127,85 @@ impl OSpi {
         while ospi.sr.read().busy().bit_is_set() {}
 
         // Заполнение instruction register кодом команды
-        ospi.ir.modify(|_, w| unsafe { w.instruction().bits(0x9f) });
+        ospi.ir.modify(|_, w| unsafe { w.instruction().bits(0x06F9) });
         while ospi.sr.read().busy().bit_is_set() {}
 
         // Указание режима работы ostospi, обязательно последним
-        ospi.cr.modify(|_, w| unsafe {w.fmode().bits(1u8)});
+        ospi.cr.modify(|_, w| unsafe {w.fmode().bits(0u8)});
         while ospi.sr.read().busy().bit_is_set() {}
         info!("{:x?}", &ospi.dr as *const _ as *const u8);
         // Заполнение регистра адреса, чтобы стриггерить отправку команды
         //ospi.ar.modify(|_, w| unsafe { w.address().bits(0x0) });
-        ospi.ir.modify(|_, w| unsafe { w.instruction().bits(0x9f) });
-
+        ospi.ir.modify(|_, w| unsafe { w.instruction().bits(0x06F9) });
 
         if ospi.sr.read().tef().bit_is_set() {
             println!("Transfer error");
         }
 
-        let buffer: &mut [u8] = &mut [0u8; 3];
-        let mut b = buffer.iter_mut();
-        while ospi.sr.read().tcf().bit_is_clear() {
-            if ospi.sr.read().ftf().bit_is_set() {
-                if let Some(v) = b.next() {
-                    unsafe {
-                        *v = ptr::read_volatile(&ospi.dr as *const _ as *const u8);
-                    }
-                } else {
-                    println!("Error");
-                    // OVERFLOW
-                }
-            }
-        }
-        // When transfer complete, empty fifo buffer
-        while ospi.sr.read().flevel().bits() > 0 {
-            if let Some(v) = b.next() {
-                unsafe {
-                    *v = ptr::read_volatile(&ospi.dr as *const _ as *const u8);
-                }
-            } else {
-                // OVERFLOW
-            }
+        // Заполнение communication configuration register параметрами команды
+        ospi.ccr.modify(|_, w| unsafe {
+            w.admode()
+                .bits(1)
+                .adsize()
+                .bits(3)
+                .abmode()
+                .bits(0)
+                .absize()
+                .bits(0)
+                .dmode()
+                .bits(0u8)
+                .imode()
+                .bits(1u8)
+                .ddtr()
+                .clear_bit()
+                .isize()
+                .bits(1u8)
+        });
+        while ospi.sr.read().busy().bit_is_set() {}
+
+        // Заполнение timing configuration register
+        ospi.tcr.modify(|_, w| unsafe { w.dcyc().bits(0b0) });
+        while ospi.sr.read().busy().bit_is_set() {}
+
+        // Заполнение instruction register кодом команды
+        ospi.ir.modify(|_, w| unsafe { w.instruction().bits(0xDC0) });
+        while ospi.sr.read().busy().bit_is_set() {}
+
+        // Указание режима работы ostospi, обязательно последним
+        ospi.cr.modify(|_, w| unsafe {w.fmode().bits(0u8)});
+        while ospi.sr.read().busy().bit_is_set() {}
+
+        ospi.ar.modify(|_, w| unsafe { w.address().bits(0x0) });
+
+        if ospi.sr.read().tef().bit_is_set() {
+            println!("Transfer error");
         }
 
-        println!("Finally!! Congratulations: {:?}", buffer);
+        // let buffer: &mut [u8] = &mut [0u8; 3];
+        // let mut b = buffer.iter_mut();
+        // while ospi.sr.read().tcf().bit_is_clear() {
+        //     if ospi.sr.read().ftf().bit_is_set() {
+        //         if let Some(v) = b.next() {
+        //             unsafe {
+        //                 *v = ptr::read_volatile(&ospi.dr as *const _ as *const u8);
+        //             }
+        //         } else {
+        //             println!("Error");
+        //             // OVERFLOW
+        //         }
+        //     }
+        // }
+        // // When transfer complete, empty fifo buffer
+        // while ospi.sr.read().flevel().bits() > 0 {
+        //     if let Some(v) = b.next() {
+        //         unsafe {
+        //             *v = ptr::read_volatile(&ospi.dr as *const _ as *const u8);
+        //         }
+        //     } else {
+        //         // OVERFLOW
+        //     }
+        // }
+
+        println!("Finally!! Congratulations");
     }
 }
