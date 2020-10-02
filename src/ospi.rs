@@ -37,7 +37,7 @@ impl OSpi {
         let p = unsafe { hal::stm32::Peripherals::steal() };
         //let mut rcc = p.RCC.constrain();
 
-        //Включаю тактирование octospi2
+        // Включаю тактирование octospi2
         rcc.ahb3enr.write(|w| w.ospi2en().set_bit());
 
         let mut rcc = p.RCC.constrain();
@@ -45,6 +45,7 @@ impl OSpi {
         let mut gpiog = p.GPIOG.split(&mut rcc.ahb2);
         let mut gpioh = p.GPIOH.split(&mut rcc.ahb2);
 
+        // Включение нужных пинов
         let _clk = gpioi.pi6.into_af5(&mut gpioi.moder, &mut gpioi.afrl).set_speed(Speed::VeryHigh);
         let _ncs = gpiog.pg12.into_af5(&mut gpiog.moder, &mut gpiog.afrh).set_speed(Speed::VeryHigh);
         let _dqs = gpiog.pg15.into_af5(&mut gpiog.moder, &mut gpiog.afrh).set_speed(Speed::VeryHigh);
@@ -61,6 +62,7 @@ impl OSpi {
 
 
 
+        // Очищение регистров
         ospi.fcr.write(|w| {
             w.ctof()
                 .set_bit()
@@ -72,7 +74,7 @@ impl OSpi {
                 .set_bit()
         });
 
-        // Octospi config
+        // Заполнение control register
         ospi.cr.modify(|_, w| unsafe {
             w.en()
                 .set_bit()
@@ -82,18 +84,8 @@ impl OSpi {
                 .bits(3u8 - 1u8)
         });
         while ospi.sr.read().busy().bit_is_set() {}
-        // ospi.sr.modify(|_, w| w.ftf().clear_bit());
-        // while ospi.sr.read().busy().bit_is_set() {}
-        // ospi.cr.modify(|_, w| w.teie().set_bit());
-        // while ospi.sr.read().busy().bit_is_set() {}
-        // ospi.cr.modify(|_, w| w.tcie().set_bit());
-        // while ospi.sr.read().busy().bit_is_set() {}
-        // ospi.cr.modify(|_, w| w.toie().set_bit());
-        // while ospi.sr.read().busy().bit_is_set() {}
-        // ospi.cr.modify(|_, w| w.en().set_bit());
-        // while ospi.sr.read().busy().bit_is_set() {}
-        // ospi.cr.modify(|_, w| w.apms().set_bit());
-        // while ospi.sr.read().busy().bit_is_set() {}
+
+        // Заполнение device configuration register 1
         unsafe { ospi.dcr1.modify(|_, w| 
             w.csht()
                 .bits(1u8)
@@ -101,25 +93,24 @@ impl OSpi {
                 .bits(25u8)
         )};
         while ospi.sr.read().busy().bit_is_set() {}
+        // Заполнение device configuration register 2
         unsafe { ospi.dcr2.modify(|_, w| w.prescaler().bits(1u8)) };
         while ospi.sr.read().busy().bit_is_set() {}
-        // ospi.sr.modify(|_, w| w.ftf().set_bit());
-        // while ospi.sr.read().busy().bit_is_set() {}
 
-        //ospi.fcr.write(|w| w.ctcf().set_bit());
+        // Заполнение data length register
         ospi.dlr.write(|w| unsafe { w.dl().bits(3u32 - 1) });
-        //ospi.cr.modify(|_, w| w.sshift().bit(false));
+        while ospi.sr.read().busy().bit_is_set() {}
 
-        // Write CCR register with instruction etc.
+        // Заполнение communication configuration register параметрами команды
         ospi.ccr.modify(|_, w| unsafe {
             w.admode()
-                .bits(1)
+                .bits(0)
                 .adsize()
-                .bits(0b11)
+                .bits(0)
                 .abmode()
-                .bits(0b0)
+                .bits(0)
                 .absize()
-                .bits(0b0)
+                .bits(0)
                 .dmode()
                 .bits(0b1)
                 .imode()
@@ -127,15 +118,25 @@ impl OSpi {
                 .ddtr()
                 .clear_bit()
                 .isize()
-                .bits(1u8)
+                .bits(0u8)
         });
+        while ospi.sr.read().busy().bit_is_set() {}
 
+        // Заполнение timing configuration register
         ospi.tcr.modify(|_, w| unsafe { w.dcyc().bits(0b0) });
+        while ospi.sr.read().busy().bit_is_set() {}
+
+        // Заполнение instruction register кодом команды
         ospi.ir.modify(|_, w| unsafe { w.instruction().bits(0x9f) });
+        while ospi.sr.read().busy().bit_is_set() {}
+
+        // Указание режима работы ostospi, обязательно последним
         ospi.cr.modify(|_, w| unsafe {w.fmode().bits(1u8)});
+        while ospi.sr.read().busy().bit_is_set() {}
         info!("{:x?}", &ospi.dr as *const _ as *const u8);
-        //ospi.ir.modify(|_, w| unsafe { w.instruction().bits(0x9f) });
-        ospi.ar.modify(|_, w| unsafe { w.address().bits(0x0) });
+        // Заполнение регистра адреса, чтобы стриггерить отправку команды
+        //ospi.ar.modify(|_, w| unsafe { w.address().bits(0x0) });
+        ospi.ir.modify(|_, w| unsafe { w.instruction().bits(0x9f) });
 
 
         if ospi.sr.read().tef().bit_is_set() {
@@ -167,6 +168,6 @@ impl OSpi {
             }
         }
 
-        println!("Finally!! Congratulations: {}", buffer[0]);
+        println!("Finally!! Congratulations: {:?}", buffer);
     }
 }
