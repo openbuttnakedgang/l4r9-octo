@@ -1,24 +1,27 @@
 
-Breakpoint=851517231: 78: 0, State=BP_STATE_ON
-Breakpoint=851517231: 79: 0, State=BP_STATE_ON
-Breakpoint=851517231: 80: 0, State=BP_STATE_ON
-OpenDocument="lib.rs", FilePath="/home/michail/.cargo/registry/src/github.com-1ecc6299db9ec823/log-0.4.11/src/lib.rs", Line=1176
-OpenDocument="mod.rs", FilePath="/home/michail/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/libcore/fmt/mod.rs", Line=184
-OpenDocument="main.rs", FilePath="/home/michail/work/l4r9-octo/src/main.rs", Line=70
+Breakpoint=2146780343: 76: 0, State=BP_STATE_ON
+Breakpoint=2146780343: 179: 0, State=BP_STATE_ON
+Breakpoint=3146252865: 83: 5, State=BP_STATE_DISABLED
+OpenDocument="generic.rs", FilePath="/home/fmv/work/l4r9-octo/stm32l4/src/generic.rs", Line=132
+OpenDocument="lib.rs", FilePath="/home/fmv/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-rt-0.6.13/src/lib.rs", Line=487
+OpenDocument="main.rs", FilePath="/home/fmv/work/l4r9-octo/src/main.rs", Line=52
+OpenDocument="lib.rs", FilePath="/home/fmv/.cargo/registry/src/github.com-1ecc6299db9ec823/log-0.4.11/src/lib.rs", Line=1177
+OpenDocument="ospi.rs", FilePath="/home/fmv/work/l4r9-octo/src/ospi.rs", Line=59
+OpenDocument="cr.rs", FilePath="/home/fmv/work/l4r9-octo/stm32l4/src/stm32l4r9/octospi1/cr.rs", Line=186
 OpenToolbar="Debug", Floating=0, x=0, y=0
-OpenWindow="Registers 1", DockArea=RIGHT, x=0, y=0, w=1064, h=548, FilterBarShown=0, ToolBarShown=0, FilteredItems=[], RefreshRate=1
-OpenWindow="Source Files", DockArea=LEFT, x=0, y=2, w=297, h=128, FilterBarShown=1, ToolBarShown=0
-OpenWindow="Disassembly", DockArea=LEFT, x=0, y=1, w=297, h=263, FilterBarShown=0, ToolBarShown=0, ExecCountersShown=0, InstEncodingsShown=0
+OpenWindow="Registers 1", DockArea=RIGHT, x=0, y=0, w=891, h=619, FilterBarShown=0, ToolBarShown=0, FilteredItems=[], RefreshRate=1
+OpenWindow="Source Files", DockArea=LEFT, x=0, y=2, w=297, h=174, FilterBarShown=1, ToolBarShown=0
+OpenWindow="Disassembly", DockArea=LEFT, x=0, y=1, w=297, h=242, FilterBarShown=0, ToolBarShown=0, ExecCountersShown=0, InstEncodingsShown=0
 OpenWindow="Source", x=0, y=0, w=0, h=0, FilterBarShown=0, ToolBarShown=0, ExecCountersShown=0
-OpenWindow="Break & Tracepoints", DockArea=LEFT, x=0, y=1, w=297, h=263, FilterBarShown=0, ToolBarShown=0, VectorCatchIndexMask=0
-OpenWindow="Memory 1", DockArea=BOTTOM, x=0, y=0, w=631, h=392, FilterBarShown=0, ToolBarShown=0, EditorAddress=0x2000011C
-OpenWindow="Functions", DockArea=LEFT, x=0, y=0, w=297, h=128, FilterBarShown=1, ToolBarShown=0
-OpenWindow="Terminal", DockArea=BOTTOM, x=2, y=0, w=746, h=392, FilterBarShown=0, ToolBarShown=0
-OpenWindow="Console", DockArea=BOTTOM, x=1, y=0, w=459, h=392, FilterBarShown=0, ToolBarShown=0
-TableHeader="Registers 1", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Address";"Description"], ColWidths=[257;337;84;371]
+OpenWindow="Break & Tracepoints", DockArea=LEFT, x=0, y=1, w=297, h=242, FilterBarShown=0, ToolBarShown=0, VectorCatchIndexMask=0
+OpenWindow="Memory 1", DockArea=BOTTOM, x=0, y=0, w=550, h=300, FilterBarShown=0, ToolBarShown=0, EditorAddress=0x0
+OpenWindow="Functions", DockArea=LEFT, x=0, y=0, w=297, h=174, FilterBarShown=1, ToolBarShown=0
+OpenWindow="Terminal", DockArea=BOTTOM, x=2, y=0, w=650, h=300, FilterBarShown=0, ToolBarShown=0
+OpenWindow="Console", DockArea=BOTTOM, x=1, y=0, w=401, h=300, FilterBarShown=0, ToolBarShown=0
 TableHeader="Vector Catches", SortCol="None", SortOrder="ASCENDING", VisibleCols=["";"Vector Catch";"Description"], ColWidths=[50;300;500]
-TableHeader="Break & Tracepoints", SortCol="None", SortOrder="ASCENDING", VisibleCols=["";"Type";"Location";"Extras"], ColWidths=[55;60;84;98]
+TableHeader="Break & Tracepoints", SortCol="None", SortOrder="ASCENDING", VisibleCols=["";"Type";"Location";"Extras"], ColWidths=[55;60;84;378]
 TableHeader="Functions", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Address";"Size";"#Insts";"Source"], ColWidths=[747;69;48;57;147]
 TableHeader="Source Files", SortCol="File", SortOrder="DESCENDING", VisibleCols=["File";"Status";"Size";"#Insts";"Path"], ColWidths=[173;59;48;57;945]
-TableHeader="Power Sampling", SortCol="None", SortOrder="ASCENDING", VisibleCols=["Index";"Time";"Ch 0"], ColWidths=[100;100;100]
+TableHeader="Power Sampling", SortCol="Index", SortOrder="ASCENDING", VisibleCols=["Index";"Time";"Ch 0"], ColWidths=[100;100;100]
+TableHeader="Registers 1", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Address";"Description"], ColWidths=[257;146;84;462]
 TableHeader="RegisterSelectionDialog", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Auto";"Name";"Address";"Description"], ColWidths=[27;27;27;27]

@@ -8215,7 +8215,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
             </field>
           </fields>
         </register>
-        <register>
+        <!-- <register>
           <name>DR</name>
           <displayName>DR</displayName>
           <description>data register</description>
@@ -8232,6 +8232,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
             </field>
           </fields>
         </register>
+        -->
         <register>
           <name>PSMKR</name>
           <displayName>PSMKR</displayName>
